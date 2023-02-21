@@ -231,6 +231,9 @@ class PubSubManagerTest extends TestCase
         $manager = new PubSubManager($app, $factory);
 
         $manager->connection('http');
+        $connections = $manager->getConnections();
+        $this->assertEquals(1, count($connections));
+        $this->assertArrayHasKey('http', $connections);
     }
 
     public function testGetDefaultConnection()
@@ -288,7 +291,7 @@ class PubSubManagerTest extends TestCase
         $manager = new PubSubManager($app, $factory);
 
         $extensions = $manager->getExtensions();
-        $this->assertInternalType('array', $extensions);
+        $this->assertIsArray($extensions);
 
         $callable = function () {
             //
